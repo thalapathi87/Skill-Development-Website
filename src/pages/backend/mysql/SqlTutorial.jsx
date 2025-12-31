@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SqlSidebar from './SqlSidebar'; // Sidebar component
-import SqlIntro  from './sqlintro';
+import SqlSidebar from './SqlSidebar'; 
+import SqlIntro from "./SqlIntro.jsx";
 import Normalization from './Normalization';
 import CoreCommands from './CoreCommands';
 import Filtering from './Filtering';
