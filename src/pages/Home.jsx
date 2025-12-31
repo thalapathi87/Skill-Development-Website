@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-/* =========================================================
-   CUSTOM SVG ICONS
-   ========================================================= */
 
+/* =========================================================
+   CUSTOM SVG ICONS (Unchanged)
+   ========================================================= */
 const Icons = {
   Java: () => (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -12,9 +12,7 @@ const Icons = {
   ),
   React: () => (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <circle cx="12" cy="12" r="2"/>
-      <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" opacity="0.3"/>
-      <path d="M12 1.5c5.799 0 10.5 4.701 10.5 10.5S17.799 22.5 12 22.5 1.5 17.799 1.5 12 6.201 1.5 12 1.5zm0 2C7.306 3.5 3.5 7.306 3.5 12S7.306 20.5 12 20.5 20.5 16.694 20.5 12 16.694 3.5 12 3.5z"/>
+      <circle cx="12" cy="12" r="2"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" opacity="0.3"/><path d="M12 1.5c5.799 0 10.5 4.701 10.5 10.5S17.799 22.5 12 22.5 1.5 17.799 1.5 12 6.201 1.5 12 1.5zm0 2C7.306 3.5 3.5 7.306 3.5 12S7.306 20.5 12 20.5 20.5 16.694 20.5 12 16.694 3.5 12 3.5z"/>
     </svg>
   ),
   Database: () => (
@@ -59,8 +57,7 @@ const Icons = {
   ),
   Award: () => (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <circle cx="12" cy="8" r="5"/>
-      <path d="M15.5 13l1.5 5-5-3-5 3 1.5-5H5v-1h14v1z"/>
+      <circle cx="12" cy="8" r="5"/><path d="M15.5 13l1.5 5-5-3-5 3 1.5-5H5v-1h14v1z"/>
     </svg>
   ),
   Quote: () => (
@@ -137,14 +134,14 @@ const Icons = {
 const Section = ({ id, children, bg = "bg-white", dark = false }) => (
   <section 
     id={id} 
-    className={`py-16 md:py-24 px-6 md:px-12 lg:px-24 ${bg} ${dark ? 'text-white' : 'text-slate-900'}`}
+    className={`py-12 md:py-16 lg:py-24 px-4 sm:px-6 md:px-12 lg:px-24 ${bg} ${dark ? 'text-white' : 'text-slate-900'}`}
   >
     <div className="max-w-7xl mx-auto">{children}</div>
   </section>
 );
 
 const Badge = ({ text }) => (
-  <span className="bg-gradient-to-r from-sky-500/10 to-indigo-500/10 text-sky-500 text-xs font-black px-5 py-2 rounded-full uppercase tracking-[0.2em] mb-6 inline-block border border-sky-500/30 shadow-lg shadow-sky-500/10 animate-pulse">
+  <span className="bg-gradient-to-r from-sky-500/10 to-indigo-500/10 text-sky-500 text-[10px] md:text-xs font-black px-4 md:px-5 py-2 rounded-full uppercase tracking-[0.2em] mb-4 md:mb-6 inline-block border border-sky-500/30 shadow-lg shadow-sky-500/10 animate-pulse">
     {text}
   </span>
 );
@@ -159,7 +156,7 @@ function AnimatedParticles() {
       {[...Array(20)].map((_, i) => (
         <div
           key={i}
-          className="absolute w-2 h-2 bg-sky-500/20 rounded-full animate-float"
+          className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-sky-500/20 rounded-full animate-float"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -188,55 +185,57 @@ function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-20">
-     
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-24 md:pt-20">
+      
       {/* Dynamic Gradient Orbs with Mouse Tracking */}
       <div 
-        className="absolute w-[800px] h-[800px] bg-sky-600/30 blur-[200px] rounded-full transition-all duration-500 pointer-events-none"
+        className="hidden md:block absolute w-[800px] h-[800px] bg-sky-600/30 blur-[200px] rounded-full transition-all duration-500 pointer-events-none"
         style={{
           left: mousePosition.x - 400,
           top: mousePosition.y - 400,
         }}
       />
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sky-600/20 blur-[150px] rounded-full animate-pulse"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-indigo-600/15 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[80%] md:w-[60%] h-[60%] bg-sky-600/20 blur-[100px] md:blur-[150px] rounded-full animate-pulse"></div>
+      <div className="absolute bottom-[-20%] right-[-10%] w-[80%] md:w-[60%] h-[60%] bg-indigo-600/15 blur-[100px] md:blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-      <div className="relative z-10 text-center px-4 max-w-6xl">
+      <div className="relative z-10 text-center px-4 md:px-6 max-w-6xl">
         <Badge text="🚀 Comprehensive Developer Track 2025" />
-        <h1 className="text-5xl md:text-9xl font-black text-white mb-8 leading-[0.95] tracking-tighter animate-fade-in-up">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white mb-6 md:mb-8 leading-[1.1] md:leading-[0.95] tracking-tighter animate-fade-in-up">
           Master the <br/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-400 animate-gradient-x">
             Full Stack
           </span>
         </h1>
-        <p className="text-slate-400 text-lg md:text-2xl mb-14 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <p className="text-slate-400 text-sm sm:text-base md:text-xl lg:text-2xl mb-10 md:mb-14 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
           The ultimate engineering curriculum. Master HTML, CSS, React, and Java Spring Boot to build 
           <span className="text-sky-400 font-bold"> scalable, production-ready </span>applications.
         </p>
         
         {/* Enhanced CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-          <button className="group relative bg-gradient-to-r from-sky-500 to-blue-600 text-white px-12 py-5 rounded-2xl font-black text-lg overflow-hidden transition-all shadow-[0_20px_60px_rgba(14,165,233,0.4)] hover:shadow-[0_25px_80px_rgba(14,165,233,0.6)] hover:scale-105">
+        <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <button className="group relative bg-gradient-to-r from-sky-500 to-blue-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-base md:text-lg overflow-hidden transition-all shadow-[0_20px_60px_rgba(14,165,233,0.4)] hover:shadow-[0_25px_80px_rgba(14,165,233,0.6)] hover:scale-105">
             <span className="relative z-10 flex items-center justify-center gap-2">
               GET STARTED <div className="w-4 h-4"><Icons.Play /></div>
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-sky-500 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
-         <Link to="/Roadmap"> <button className="group bg-white/5 border-2 border-white/20 text-white px-12 py-5 rounded-2xl font-bold backdrop-blur-xl hover:bg-white/10 hover:border-sky-500/50 transition-all flex items-center justify-center gap-3">
-            VIEW ROADMAP <div className="w-4 h-4 group-hover:translate-x-1 transition-transform"><Icons.ChevronRight /></div>
-          </button></Link>
+          <Link to="/Roadmap" className="block"> 
+            <button className="w-full group bg-white/5 border-2 border-white/20 text-white px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-bold backdrop-blur-xl hover:bg-white/10 hover:border-sky-500/50 transition-all flex items-center justify-center gap-3">
+              VIEW ROADMAP <div className="w-4 h-4 group-hover:translate-x-1 transition-transform"><Icons.ChevronRight /></div>
+            </button>
+          </Link>
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-16 flex flex-wrap justify-center gap-8 text-slate-500 text-sm animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="mt-12 md:mt-16 flex flex-wrap justify-center gap-4 md:gap-8 text-slate-500 text-[10px] sm:text-xs md:text-sm animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 text-sky-500"><Icons.Check /></div> 100% Job Oriented
+            <div className="w-4 h-4 md:w-5 md:h-5 text-sky-500"><Icons.Check /></div> 100% Job Oriented
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 text-sky-500"><Icons.Clock /></div> 400+ Hours Content
+            <div className="w-4 h-4 md:w-5 md:h-5 text-sky-500"><Icons.Clock /></div> 400+ Hours Content
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 text-sky-500"><Icons.Graduation /></div> Industry Certified
+            <div className="w-4 h-4 md:w-5 md:h-5 text-sky-500"><Icons.Graduation /></div> Industry Certified
           </div>
         </div>
       </div>
@@ -250,20 +249,20 @@ function HeroSection() {
 
 function StatsBar() {
     const stats = [
-        { label: "Students Placed", value: "12,000+", icon: Icons.Users },
+        { label: "Students Placed", value: "120+", icon: Icons.Users },
         { label: "Avg Salary Hike", value: "65%", icon: Icons.Award },
-        { label: "Hiring Partners", value: "450+", icon: Icons.Shield },
+        { label: "Hiring Partners", value: "45+", icon: Icons.Shield },
         { label: "Projects Built", value: "25+", icon: Icons.Rocket }
     ];
     return (
-        <div className="bg-gradient-to-b from-slate-900 to-slate-950 py-20 border-y border-white/5 relative overflow-hidden">
+        <div className="bg-gradient-to-b from-slate-900 to-slate-950 py-12 md:py-20 border-y border-white/5 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-transparent to-indigo-500/5" />
-            <div className="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div className="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 px-4 text-center">
                 {stats.map((s, i) => (
                     <div key={i} className="group animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                        <div className="w-16 h-16 mx-auto text-sky-400 mb-4 group-hover:scale-110 transition-transform"><s.icon /></div>
-                        <div className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 text-5xl font-black mb-2">{s.value}</div>
-                        <div className="text-slate-500 text-xs font-black uppercase tracking-[0.2em]">{s.label}</div>
+                        <div className="w-10 h-10 md:w-16 md:h-16 mx-auto text-sky-400 mb-3 md:mb-4 group-hover:scale-110 transition-transform"><s.icon /></div>
+                        <div className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 text-3xl sm:text-4xl md:text-5xl font-black mb-1 md:mb-2">{s.value}</div>
+                        <div className="text-slate-500 text-[9px] md:text-xs font-black uppercase tracking-[0.15em] md:tracking-[0.2em]">{s.label}</div>
                     </div>
                 ))}
             </div>
@@ -305,20 +304,20 @@ function ProfessionalSkills() {
 
   return (
     <Section bg="bg-white">
-      <div className="text-center mb-20">
+      <div className="text-center mb-12 md:mb-20">
         <Badge text="💼 Skill Set Breakdown" />
-        <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-4">Professional <br/>Curriculum</h2>
-        <p className="text-slate-600 text-lg max-w-2xl mx-auto">Industry-grade skills that top companies demand</p>
+        <h2 className="text-3xl sm:text-4xl md:text-7xl font-black text-slate-900 leading-tight mb-4 tracking-tight">Professional <br className="hidden sm:block"/>Curriculum</h2>
+        <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto px-2">Industry-grade skills that top companies demand</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {modules.map((m, i) => (
-          <div key={i} className={`group p-8 bg-gradient-to-br ${m.color} rounded-[2.5rem] border-2 border-slate-100 hover:border-sky-500 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/20 hover:-translate-y-2`}>
-            <div className="w-16 h-16 text-sky-400 mb-6 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500"><m.icon /></div>
-            <h3 className="text-2xl font-black mb-6 border-b-2 border-slate-200 pb-4 group-hover:text-sky-600 transition-colors">{m.title}</h3>
-            <ul className="space-y-4">
+          <div key={i} className={`group p-6 md:p-8 bg-gradient-to-br ${m.color} rounded-2xl md:rounded-[2.5rem] border-2 border-slate-100 hover:border-sky-500 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/20 hover:-translate-y-2`}>
+            <div className="w-12 h-12 md:w-16 md:h-16 text-sky-400 mb-4 md:mb-6 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500"><m.icon /></div>
+            <h3 className="text-xl md:text-2xl font-black mb-4 md:mb-6 border-b-2 border-slate-200 pb-3 md:pb-4 group-hover:text-sky-600 transition-colors">{m.title}</h3>
+            <ul className="space-y-3 md:space-y-4">
               {m.skills.map((skill, j) => (
-                <li key={j} className="flex items-start gap-3 text-slate-700 text-xs font-bold uppercase tracking-wide group-hover:text-slate-900 transition-colors">
-                  <div className="w-5 h-5 text-sky-500 flex-shrink-0 group-hover:scale-125 transition-transform"><Icons.Check /></div>
+                <li key={j} className="flex items-start gap-2.5 md:gap-3 text-slate-700 text-[10px] md:text-xs font-bold uppercase tracking-wide group-hover:text-slate-900 transition-colors">
+                  <div className="w-4 h-4 md:w-5 md:h-5 text-sky-500 flex-shrink-0 group-hover:scale-125 transition-transform"><Icons.Check /></div>
                   <span>{skill}</span>
                 </li>
               ))}
@@ -344,33 +343,33 @@ function WeeklyTimeline() {
     
     return (
         <Section bg="bg-gradient-to-b from-slate-50 to-white">
-            <div className="flex flex-col lg:flex-row gap-20">
-                <div className="lg:w-1/3">
+            <div className="flex flex-col lg:flex-row gap-12 md:gap-20">
+                <div className="lg:w-1/3 text-center lg:text-left">
                     <Badge text="📅 The Schedule" />
-                    <h2 className="text-5xl font-black mb-6 leading-tight">Your 16-Week <br/>Evolution</h2>
-                    <p className="text-slate-600 leading-relaxed mb-8 text-lg">A rigorous, step-by-step program designed to transform beginners into senior-grade engineers.</p>
-                    <div className="p-8 bg-gradient-to-br from-sky-50 to-blue-50 rounded-3xl border-l-4 border-sky-500 shadow-lg">
-                        <div className="w-8 h-8 text-sky-500 mb-4"><Icons.Quote /></div>
-                        <p className="text-sky-900 font-bold italic text-lg">"Over 400 hours of intensive coding and real-world deployment."</p>
-                        <p className="text-sky-700 text-sm mt-2">— Course Director</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 md:mb-6 leading-tight">Your 16-Week <br className="hidden lg:block"/>Evolution</h2>
+                    <p className="text-slate-600 leading-relaxed mb-6 md:mb-8 text-base md:text-lg px-2">A rigorous, step-by-step program designed to transform beginners into senior-grade engineers.</p>
+                    <div className="p-6 md:p-8 bg-gradient-to-br from-sky-50 to-blue-50 rounded-2xl md:rounded-3xl border-l-4 border-sky-500 shadow-lg inline-block text-left mx-auto">
+                        <div className="w-6 h-6 md:w-8 md:h-8 text-sky-500 mb-2 md:mb-4"><Icons.Quote /></div>
+                        <p className="text-sky-900 font-bold italic text-base md:text-lg">"Over 400 hours of intensive coding and real-world deployment."</p>
+                        <p className="text-sky-700 text-xs md:text-sm mt-2">— Course Director</p>
                     </div>
                 </div>
-                <div className="lg:w-2/3 space-y-6">
+                <div className="lg:w-2/3 space-y-4 md:space-y-6">
                     {weeks.map((week, i) => (
-                        <div key={i} className="group flex gap-6 p-8 bg-white rounded-3xl border-2 border-slate-100 hover:border-sky-500 transition-all hover:shadow-xl hover:-translate-x-2">
-                            <div className="flex-shrink-0">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white font-black text-lg shadow-lg group-hover:scale-110 transition-transform">
+                        <div key={i} className="group flex flex-col sm:flex-row gap-4 md:gap-6 p-6 md:p-8 bg-white rounded-2xl md:rounded-3xl border-2 border-slate-100 hover:border-sky-500 transition-all hover:shadow-xl hover:-translate-x-1 sm:hover:-translate-x-2">
+                            <div className="flex-shrink-0 flex justify-center sm:block">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white font-black text-base md:text-lg shadow-lg group-hover:scale-110 transition-transform">
                                     {i + 1}
                                 </div>
                             </div>
                             <div className="flex-grow">
                                 <div className="flex justify-between items-start mb-2">
-                                    <div className="text-sky-600 font-black text-sm">{week.w}</div>
-                                    <div className="text-sky-600 font-bold text-sm">{week.progress}%</div>
+                                    <div className="text-sky-600 font-black text-[10px] md:text-sm uppercase">{week.w}</div>
+                                    <div className="text-sky-600 font-bold text-xs md:text-sm">{week.progress}%</div>
                                 </div>
-                                <h4 className="text-xl font-black mb-2 group-hover:text-sky-600 transition-colors">{week.t}</h4>
-                                <p className="text-slate-600 text-sm leading-relaxed mb-4">{week.d}</p>
-                                <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                                <h4 className="text-lg md:text-xl font-black mb-1 md:mb-2 group-hover:text-sky-600 transition-colors text-center sm:text-left">{week.t}</h4>
+                                <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 text-center sm:text-left">{week.d}</p>
+                                <div className="w-full bg-slate-200 rounded-full h-1.5 md:h-2 overflow-hidden">
                                     <div 
                                         className="h-full bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-1000 group-hover:animate-pulse"
                                         style={{ width: `${week.progress}%` }}
@@ -403,17 +402,17 @@ function Toolbox() {
 
   return (
     <Section bg="bg-gradient-to-b from-slate-950 to-slate-900" dark>
-      <div className="text-center mb-20">
+      <div className="text-center mb-12 md:mb-20">
         <Badge text="🛠️ Technologies" />
-        <h2 className="text-4xl md:text-6xl font-black mb-6 text-white">Industrial Tooling</h2>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto">Master the technologies used by engineers at world-class software companies.</p>
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 md:mb-6 text-white tracking-tight">Industrial Tooling</h2>
+        <p className="text-slate-400 text-sm md:text-lg max-w-2xl mx-auto px-4">Master the technologies used by engineers at world-class software companies.</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
         {tools.map((t, i) => (
-          <div key={i} className="group relative p-10 bg-white/5 border-2 border-white/10 rounded-3xl hover:bg-gradient-to-br hover:from-sky-500/20 hover:to-blue-500/20 hover:border-sky-500 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-sky-500/30">
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/0 to-blue-500/0 group-hover:from-sky-500/10 group-hover:to-blue-500/10 rounded-3xl transition-all duration-500" />
-            <div className={`relative w-20 h-20 mx-auto ${t.color} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 mb-6`}><t.icon /></div>
-            <span className="relative block text-center font-bold text-sm tracking-wider uppercase text-slate-400 group-hover:text-white transition-colors">{t.n}</span>
+          <div key={i} className="group relative p-6 md:p-10 bg-white/5 border-2 border-white/10 rounded-2xl md:rounded-3xl hover:bg-gradient-to-br hover:from-sky-500/20 hover:to-blue-500/20 hover:border-sky-500 transition-all duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:shadow-2xl hover:shadow-sky-500/30">
+            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/0 to-blue-500/0 group-hover:from-sky-500/10 group-hover:to-blue-500/10 rounded-2xl md:rounded-3xl transition-all duration-500" />
+            <div className={`relative w-12 h-12 md:w-20 md:h-20 mx-auto ${t.color} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 mb-4 md:mb-6`}><t.icon /></div>
+            <span className="relative block text-center font-bold text-[10px] md:text-sm tracking-widest uppercase text-slate-400 group-hover:text-white transition-colors">{t.n}</span>
           </div>
         ))}
       </div>
@@ -422,61 +421,35 @@ function Toolbox() {
 }
 
 /* =========================================================
-   CUSTOM CSS ANIMATIONS
+   CUSTOM CSS ANIMATIONS (Unchanged)
    ========================================================= */
 
 const styles = `
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes gradient-x {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
 }
-
 @keyframes infinite-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-}
-
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 3s ease infinite;
-}
-
-.animate-float {
-  animation: float ease-in-out infinite;
-}
-
-.animate-infinite-scroll {
-  animation: infinite-scroll 30s linear infinite;
-}
+.animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+.animate-fade-in { animation: fade-in 1s ease-out forwards; }
+.animate-gradient-x { background-size: 200% 200%; animation: gradient-x 3s ease infinite; }
+.animate-float { animation: float ease-in-out infinite; }
+.animate-infinite-scroll { animation: infinite-scroll 30s linear infinite; }
 `;
 
 function Home() {
@@ -486,22 +459,12 @@ function Home() {
       <div className="font-sans antialiased bg-white selection:bg-sky-500 selection:text-white overflow-x-hidden">
         <HeroSection />
         
-        {/* Enhanced Skill Bar */}
-        <div className="py-16 bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border-y border-white/10 flex overflow-hidden relative">
+        {/* Responsive Skill Ticker */}
+        <div className="py-10 md:py-16 bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border-y border-white/10 flex overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-sky-500/5 to-transparent" />
-          <div className="flex gap-20 animate-infinite-scroll font-black text-slate-700 text-3xl uppercase tracking-[1em] whitespace-nowrap">
-            <span className="hover:text-sky-500 transition-colors cursor-default">HTML5</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">CSS3</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">JAVASCRIPT</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">REACT</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">TAILWIND</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">JAVA</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">SPRING BOOT</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">MYSQL</span>
-            <span className="hover:text-sky-500 transition-colors cursor-default">HTML5</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">CSS3</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">JAVASCRIPT</span> 
-            <span className="hover:text-sky-500 transition-colors cursor-default">REACT</span>
+          <div className="flex gap-10 md:gap-20 animate-infinite-scroll font-black text-slate-700 text-xl sm:text-2xl md:text-3xl uppercase tracking-[0.5em] md:tracking-[1em] whitespace-nowrap">
+            <span>HTML5</span> <span>CSS3</span> <span>JAVASCRIPT</span> <span>REACT</span> <span>TAILWIND</span> <span>JAVA</span> <span>SPRING BOOT</span> <span>MYSQL</span>
+            <span>HTML5</span> <span>CSS3</span> <span>JAVASCRIPT</span> <span>REACT</span> <span>TAILWIND</span> <span>JAVA</span> <span>SPRING BOOT</span> <span>MYSQL</span>
           </div>
         </div>
 
@@ -510,39 +473,39 @@ function Home() {
         <WeeklyTimeline />
         <Toolbox />
 
-        {/* ENHANCED CALL TO ACTION */}
+        {/* ENHANCED CALL TO ACTION - Responsive padding & typography */}
         <Section bg="bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-600" dark>
-          <div className="text-center max-w-4xl mx-auto relative">
+          <div className="text-center max-w-4xl mx-auto relative px-2">
             <div className="absolute inset-0 bg-white/5 blur-3xl rounded-full" />
             <Badge text="⚡ Limited Seats Available" />
-            <h2 className="relative text-5xl md:text-7xl font-black mb-6 leading-tight">
-              Ready to build your <br/>
+            <h2 className="relative text-3xl sm:text-5xl md:text-7xl font-black mb-4 md:mb-6 leading-tight tracking-tight">
+              Ready to build your <br className="hidden sm:block"/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-200">Developer Career?</span>
             </h2>
-            <p className="relative text-sky-100 text-xl mb-10">Join 12,000+ successful developers who transformed their careers</p>
-            <button className="relative group bg-white text-sky-600 px-16 py-6 rounded-3xl font-black text-xl shadow-2xl hover:shadow-[0_30px_100px_rgba(255,255,255,0.3)] hover:scale-110 transition-all overflow-hidden">
+            <p className="relative text-sky-100 text-base md:text-xl mb-8 md:mb-10 opacity-90">Join 12,000+ successful developers who transformed their careers</p>
+            <button className="relative group bg-white text-sky-600 px-10 md:px-16 py-4 md:py-6 rounded-2xl md:rounded-3xl font-black text-lg md:text-xl shadow-2xl hover:scale-105 transition-all">
               <span className="relative z-10">Apply for 2025 Batch</span>
               <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
           </div>
         </Section>
 
-        {/* ENHANCED FOOTER */}
-        <footer className="py-24 px-8 bg-gradient-to-b from-slate-950 to-black text-slate-500 relative overflow-hidden">
+        {/* ENHANCED FOOTER - Responsive grid */}
+        <footer className="py-16 md:py-24 px-6 md:px-8 bg-gradient-to-b from-slate-950 to-black text-slate-500 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-sky-500/5 via-transparent to-transparent pointer-events-none" />
-          <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-20 text-left">
-            <div className="col-span-1 md:col-span-2 text-white">
-              <h4 className="font-black text-4xl mb-8 uppercase tracking-widest bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">SkillsDev.</h4>
-              <p className="max-w-sm text-slate-400 leading-relaxed mb-6">The only roadmap you need to build scalable applications using the Java Full Stack ecosystem.</p>
-              <div className="flex gap-4">
+          <div className="relative max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-20 text-center sm:text-left">
+            <div className="sm:col-span-2 text-white">
+              <h4 className="font-black text-3xl md:text-4xl mb-6 md:mb-8 uppercase tracking-widest bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">SkillsDev.</h4>
+              <p className="max-w-sm text-slate-400 leading-relaxed mb-6 mx-auto sm:mx-0">The only roadmap you need to build scalable applications using the Java Full Stack ecosystem.</p>
+              <div className="flex justify-center sm:justify-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-white/5 hover:bg-sky-500/20 flex items-center justify-center cursor-pointer transition-all hover:scale-110">
                   <div className="w-5 h-5"><Icons.GitHub /></div>
                 </div>
               </div>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-8 uppercase tracking-[0.3em] text-xs">Technical</h4>
-              <ul className="space-y-4 text-sm font-medium">
+              <h4 className="text-white font-bold mb-6 md:mb-8 uppercase tracking-[0.3em] text-xs">Technical</h4>
+              <ul className="space-y-3 md:space-y-4 text-sm font-medium">
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">Frontend</li>
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">Spring Boot</li>
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">SQL</li>
@@ -550,19 +513,16 @@ function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-8 uppercase tracking-[0.3em] text-xs">Legal</h4>
-              <ul className="space-y-4 text-sm font-medium">
+              <h4 className="text-white font-bold mb-6 md:mb-8 uppercase tracking-[0.3em] text-xs">Legal</h4>
+              <ul className="space-y-3 md:space-y-4 text-sm font-medium">
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">Privacy</li>
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">Terms</li>
                 <li className="hover:text-sky-400 transition-colors cursor-pointer">Refunds</li>
               </ul>
             </div>
           </div>
-          <div className="relative pt-12 border-t border-white/5 text-center text-xs uppercase tracking-[0.8em] font-black text-slate-700">
-            © 2025 SkillsDev Platform  
-Built with a focus on clarity, consistency, and career-oriented learning.  
-Created by Thalapathi.
-
+          <div className="relative pt-10 md:pt-12 border-t border-white/5 text-center text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.8em] font-black text-slate-700">
+            © 2025 SkillsDev Platform | Created by Thalapathi
           </div>
         </footer>
       </div>

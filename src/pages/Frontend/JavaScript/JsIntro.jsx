@@ -15,7 +15,11 @@ function JsIntro() {
           What is <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">JavaScript?</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl font-medium">
-          JavaScript is the "brain" of the web. While HTML builds the structure and CSS adds the style, JavaScript makes things **move and react** when a user interacts with the page.
+         JavaScript is the brain of the web.
+HTML creates the structure of a page.
+CSS controls the design and layout.
+JavaScript adds actions and behavior.
+It allows pages to respond when users click, type, or scroll.
         </p>
       </header>
 

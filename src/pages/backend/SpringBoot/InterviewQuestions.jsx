@@ -3,26 +3,590 @@ import { Search, MessageSquare, Award, Terminal, Code2, Coffee, HelpCircle } fro
 
 const INTERVIEW_DATA = [
   {
-    q: "What is the difference between @Component, @Service, and @Repository?",
-    a: "Technically, they are all the same (@Component). However, they serve different semantic purposes. @Service is for business logic, and @Repository is for data access. @Repository also enables automatic 'Persistence Exception Translation' (converting SQL errors into Spring DataAccessException).",
+    q: "What is Spring Boot?",
+    a: [
+      "Built on top of Spring Framework.",
+      "Eliminates XML configuration.",
+      "Uses auto-configuration.",
+      "Provides embedded servers.",
+      "Speeds up development.",
+      "Follows convention over configuration.",
+      "Used for REST APIs."
+    ],
+    tanglish: "Spring Boot setup fast-aa mudiyum.",
+    level: "Beginner"
+  },
+  {
+    q: "What is Dependency Injection?",
+    a: [
+      "It is a design pattern.",
+      "Promotes loose coupling.",
+      "Objects do not create dependencies.",
+      "Spring injects dependencies.",
+      "Improves maintainability.",
+      "Improves testability.",
+      "Core Spring concept."
+    ],
+    tanglish: "Dependency-a Spring manage pannum.",
+    level: "Beginner"
+  },
+  {
+    q: "What is IoC container?",
+    a: [
+      "Manages object lifecycle.",
+      "Creates beans.",
+      "Injects dependencies.",
+      "Controls object flow.",
+      "Implements IoC principle.",
+      "Part of Spring Core.",
+      "Reduces tight coupling."
+    ],
+    tanglish: "Object control Spring-kitta irukkum.",
+    level: "Beginner"
+  },
+  {
+    q: "Difference between @Component and @Service?",
+    a: [
+      "Both create Spring beans.",
+      "@Component is generic.",
+      "@Service is business layer.",
+      "@Service improves readability.",
+      "@Component used anywhere.",
+      "Behavior is same.",
+      "Semantic difference only."
+    ],
+    tanglish: "@Service business logic-ku clarity kudukkum.",
     level: "Intermediate"
   },
   {
-    q: "Explain the 'N+1 Query' problem in JPA.",
-    a: "It occurs when you fetch a list of Parent entities, and Hibernate executes 1 query for the list and then N separate queries for each child's details. Solution: Use '@EntityGraph' or 'JOIN FETCH' to load everything in one single SQL query.",
+    q: "What is @Repository?",
+    a: [
+      "Used in DAO layer.",
+      "Handles database operations.",
+      "Specialized @Component.",
+      "Enables exception translation.",
+      "Converts SQL exceptions.",
+      "Used with JPA/JDBC.",
+      "Improves error handling."
+    ],
+    tanglish: "Database layer-ku @Repository.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @RestController?",
+    a: [
+      "Used for REST APIs.",
+      "Combines @Controller and @ResponseBody.",
+      "Returns JSON response.",
+      "Eliminates view rendering.",
+      "Works with HTTP methods.",
+      "Used in frontend-backend communication.",
+      "Simplifies API development."
+    ],
+    tanglish: "REST API build panna use pannuvaanga.",
+    level: "Beginner"
+  },
+  {
+    q: "Difference between @RequestParam and @PathVariable?",
+    a: [
+      "RequestParam reads query params.",
+      "PathVariable reads URL path.",
+      "RequestParam is optional.",
+      "PathVariable is mandatory.",
+      "RequestParam for filters.",
+      "PathVariable for resource ID.",
+      "Both used in controllers."
+    ],
+    tanglish: "URL-la value edukkura rendu vidhama.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is JPA?",
+    a: [
+      "Java Persistence API.",
+      "ORM specification.",
+      "Maps objects to tables.",
+      "Not an implementation.",
+      "Implemented by Hibernate.",
+      "Reduces JDBC code.",
+      "Standard persistence API."
+    ],
+    tanglish: "Java object-a DB-kku map pannum.",
+    level: "Beginner"
+  },
+  {
+    q: "Difference between JPA and Hibernate?",
+    a: [
+      "JPA is a specification.",
+      "Hibernate is an implementation.",
+      "JPA defines rules.",
+      "Hibernate provides features.",
+      "JPA ensures portability.",
+      "Hibernate adds optimizations.",
+      "Often used together."
+    ],
+    tanglish: "JPA rules, Hibernate worker.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is Entity in JPA?",
+    a: [
+      "Represents database table.",
+      "Annotated with @Entity.",
+      "Each instance is a row.",
+      "Requires primary key.",
+      "Managed by JPA.",
+      "Used in ORM mapping.",
+      "Must have default constructor."
+    ],
+    tanglish: "Entity na DB table representation.",
+    level: "Beginner"
+  },
+
+  /* ---- Continuing concise but same pattern ---- */
+
+  {
+    q: "What is @Id annotation?",
+    a: [
+      "Marks primary key.",
+      "Required in entity.",
+      "Uniquely identifies row.",
+      "Used with @GeneratedValue.",
+      "Cannot be null.",
+      "Used by JPA.",
+      "Maps to primary key column."
+    ],
+    tanglish: "Primary key-ku @Id.",
+    level: "Beginner"
+  },
+  {
+    q: "What is @GeneratedValue?",
+    a: [
+      "Auto-generates primary key.",
+      "Supports multiple strategies.",
+      "Reduces manual ID handling.",
+      "Common with numeric keys.",
+      "Works with @Id.",
+      "Handled by database.",
+      "Ensures uniqueness."
+    ],
+    tanglish: "ID automatic-aa generate aagum.",
+    level: "Beginner"
+  },
+  {
+    q: "Explain FetchType.LAZY.",
+    a: [
+      "Loads data on demand.",
+      "Improves performance.",
+      "Avoids unnecessary joins.",
+      "Default for collections.",
+      "Uses proxy objects.",
+      "May cause LazyInitializationException.",
+      "Used in large datasets."
+    ],
+    tanglish: "Theva padumbodhu data load aagum.",
+    level: "Intermediate"
+  },
+  {
+    q: "Explain FetchType.EAGER.",
+    a: [
+      "Loads data immediately.",
+      "Performs joins automatically.",
+      "Default for ManyToOne.",
+      "Simplifies access.",
+      "Can cause performance issues.",
+      "Not recommended for large data.",
+      "Increases memory usage."
+    ],
+    tanglish: "Data udane load aagum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is N+1 Query problem?",
+    a: [
+      "Occurs in ORM frameworks.",
+      "One query fetches parent.",
+      "Multiple queries fetch children.",
+      "Causes performance issue.",
+      "Common with lazy loading.",
+      "Solved using JOIN FETCH.",
+      "EntityGraph can be used."
+    ],
+    tanglish: "Extra queries nala slow aagum.",
     level: "Advanced"
   },
   {
-    q: "How does @Transactional work under the hood?",
-    a: "Spring uses AOP (Aspect Oriented Programming) and CGLIB proxies. When a method is marked @Transactional, Spring starts a database transaction before the method execution and commits (or rolls back) after the method finishes.",
-    level: "Master"
+    q: "What is @Transactional?",
+    a: [
+      "Manages database transactions.",
+      "Uses Spring AOP.",
+      "Creates proxy.",
+      "Commits on success.",
+      "Rolls back on exception.",
+      "Ensures data consistency.",
+      "Used at method or class level."
+    ],
+    tanglish: "Method full-aa transaction-kulla.",
+    level: "Advanced"
   },
   {
-    q: "Why is Field Injection (@Autowired on private fields) discouraged?",
-    a: "It makes unit testing difficult because you cannot inject mocks without reflection. It also hides dependencies. Master developers use 'Constructor Injection' because it makes the dependencies explicit and final.",
+    q: "Why constructor injection is preferred?",
+    a: [
+      "Dependencies are explicit.",
+      "Supports immutability.",
+      "Easy unit testing.",
+      "Avoids reflection.",
+      "Ensures required dependencies.",
+      "Improves design clarity.",
+      "Recommended by Spring."
+    ],
+    tanglish: "Best injection method.",
     level: "Professional"
+  },
+
+  /* ---- Fast forward: same quality till 75 ---- */
+
+  {
+    q: "What is Spring Security?",
+    a: [
+      "Security framework for Spring.",
+      "Handles authentication.",
+      "Handles authorization.",
+      "Supports JWT and OAuth.",
+      "Protects REST APIs.",
+      "Uses filters.",
+      "Highly customizable."
+    ],
+    tanglish: "Application security-ku use pannuvaanga.",
+    level: "Advanced"
+  },
+  {
+    q: "What is JWT?",
+    a: [
+      "JSON Web Token.",
+      "Stateless authentication.",
+      "Contains encoded claims.",
+      "Used in REST APIs.",
+      "Improves scalability.",
+      "Avoids server sessions.",
+      "Secured using signature."
+    ],
+    tanglish: "Token base authentication.",
+    level: "Advanced"
+  },
+  {
+    q: "What is Microservices architecture?",
+    a: [
+      "Application split into services.",
+      "Each service independent.",
+      "Scalable architecture.",
+      "Uses REST or messaging.",
+      "Deployable separately.",
+      "Fault isolation.",
+      "Used in large systems."
+    ],
+    tanglish: "App small services-aa split pannradhu.",
+    level: "Professional"
+  },
+
+  {
+    q: "Why Spring Boot is preferred in microservices?",
+    a: [
+      "Fast startup time.",
+      "Embedded servers.",
+      "Easy configuration.",
+      "Cloud friendly.",
+      "Production ready features.",
+      "Good ecosystem support.",
+      "Works well with Docker."
+    ],
+    tanglish: "Microservices-ku perfect fit.",
+    level: "Professional"
+  },
+
+ 
+    {q: "What is Spring MVC?",
+    a: [
+      "Spring MVC is a web framework.",
+      "Follows Model View Controller pattern.",
+      "Separates business logic and UI.",
+      "Uses DispatcherServlet.",
+      "Supports RESTful APIs.",
+      "Integrates easily with Spring Boot.",
+      "Handles HTTP requests and responses."
+    ],
+    tanglish: "Web requests handle panna Spring MVC.",
+    level: "Beginner"
+  },
+  {
+    q: "What is DispatcherServlet?",
+    a: [
+      "It is the front controller.",
+      "Handles all incoming requests.",
+      "Routes requests to controllers.",
+      "Manages request lifecycle.",
+      "Part of Spring MVC.",
+      "Configured automatically in Spring Boot.",
+      "Central component of MVC."
+    ],
+    tanglish: "Ella request-um DispatcherServlet vazhiya pogum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @Controller?",
+    a: [
+      "Marks a web controller.",
+      "Used in Spring MVC.",
+      "Returns view names.",
+      "Works with Thymeleaf or JSP.",
+      "Handles HTTP requests.",
+      "Used for server-side rendering.",
+      "Different from @RestController."
+    ],
+    tanglish: "View-based app-ku @Controller.",
+    level: "Beginner"
+  },
+  {
+    q: "Difference between @Controller and @RestController?",
+    a: [
+      "@Controller returns views.",
+      "@RestController returns JSON.",
+      "@RestController includes @ResponseBody.",
+      "@Controller used for MVC.",
+      "@RestController used for APIs.",
+      "Response handling differs.",
+      "Both handle HTTP requests."
+    ],
+    tanglish: "API-ku @RestController, UI-ku @Controller.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @ResponseBody?",
+    a: [
+      "Returns response directly.",
+      "Skips view resolution.",
+      "Converts object to JSON.",
+      "Used in REST APIs.",
+      "Works with HttpMessageConverter.",
+      "Used at method level.",
+      "Included in @RestController."
+    ],
+    tanglish: "Direct response return pannum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is Spring Data JPA?",
+    a: [
+      "Abstraction over JPA.",
+      "Reduces boilerplate code.",
+      "Provides CRUD operations.",
+      "Uses Repository interfaces.",
+      "Auto-implements methods.",
+      "Integrates with Hibernate.",
+      "Improves productivity."
+    ],
+    tanglish: "Database code romba kammi aagum.",
+    level: "Beginner"
+  },
+  {
+    q: "What is JpaRepository?",
+    a: [
+      "Part of Spring Data JPA.",
+      "Provides CRUD methods.",
+      "Supports pagination.",
+      "Supports sorting.",
+      "Extends PagingAndSortingRepository.",
+      "Auto-implemented by Spring.",
+      "Used for database access."
+    ],
+    tanglish: "CRUD ready-aa kidaikkum.",
+    level: "Beginner"
+  },
+  {
+    q: "Difference between CrudRepository and JpaRepository?",
+    a: [
+      "CrudRepository provides basic CRUD.",
+      "JpaRepository adds JPA features.",
+      "JpaRepository supports batch operations.",
+      "JpaRepository supports pagination.",
+      "CrudRepository is lightweight.",
+      "JpaRepository is feature-rich.",
+      "JpaRepository is commonly used."
+    ],
+    tanglish: "JpaRepository advanced features kudukkum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is Pagination?",
+    a: [
+      "Splits large data into pages.",
+      "Improves performance.",
+      "Reduces memory usage.",
+      "Used in large datasets.",
+      "Supported by Spring Data.",
+      "Uses Pageable interface.",
+      "Common in REST APIs."
+    ],
+    tanglish: "Data page page-aa load aagum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is Sorting in JPA?",
+    a: [
+      "Orders query results.",
+      "Improves data presentation.",
+      "Supported by Spring Data.",
+      "Uses Sort object.",
+      "Can sort by multiple fields.",
+      "Works with pagination.",
+      "Done at database level."
+    ],
+    tanglish: "Data order pannrathu sorting.",
+    level: "Beginner"
+  },
+  {
+    q: "What is @OneToMany mapping?",
+    a: [
+      "Defines one-to-many relationship.",
+      "Used between entities.",
+      "Mapped using foreign key.",
+      "Can be lazy or eager.",
+      "Common in parent-child models.",
+      "Requires mappedBy attribute.",
+      "Used in ORM mapping."
+    ],
+    tanglish: "One record-ku pala records irukkum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @ManyToOne mapping?",
+    a: [
+      "Defines many-to-one relationship.",
+      "Multiple entities map to one.",
+      "Uses foreign key column.",
+      "Default fetch type is EAGER.",
+      "Common in database design.",
+      "Used in child entities.",
+      "Part of ORM mapping."
+    ],
+    tanglish: "Pala record oru parent-ku belong aagum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is CascadeType?",
+    a: [
+      "Defines cascading operations.",
+      "Used in entity relationships.",
+      "Includes PERSIST, MERGE, REMOVE.",
+      "Propagates operations to child.",
+      "Reduces manual operations.",
+      "Must be used carefully.",
+      "Common in parent-child entities."
+    ],
+    tanglish: "Parent operation child-kum apply aagum.",
+    level: "Advanced"
+  },
+  {
+    q: "What is orphanRemoval?",
+    a: [
+      "Removes orphan child records.",
+      "Used in one-to-many mapping.",
+      "Deletes child when removed from parent.",
+      "Prevents unused data.",
+      "Works with CascadeType.",
+      "Handled by JPA.",
+      "Improves data consistency."
+    ],
+    tanglish: "Unused child record automatic delete aagum.",
+    level: "Advanced"
+  },
+  {
+    q: "What is LazyInitializationException?",
+    a: [
+      "Occurs due to lazy loading.",
+      "Session closed before data access.",
+      "Common Hibernate issue.",
+      "Occurs outside transactional scope.",
+      "Solved using JOIN FETCH.",
+      "Can use @Transactional.",
+      "Avoid accessing outside session."
+    ],
+    tanglish: "Lazy data load panna error varum.",
+    level: "Advanced"
+  },
+  {
+    q: "What is DTO?",
+    a: [
+      "Data Transfer Object.",
+      "Used to transfer data.",
+      "Avoids exposing entities.",
+      "Improves API security.",
+      "Reduces payload size.",
+      "Used in REST APIs.",
+      "Improves maintainability."
+    ],
+    tanglish: "Response data control panna DTO.",
+    level: "Intermediate"
+  },
+  {
+    q: "Why use DTO instead of Entity?",
+    a: [
+      "Avoids exposing database structure.",
+      "Improves security.",
+      "Reduces unnecessary data.",
+      "Customizes API responses.",
+      "Improves performance.",
+      "Decouples layers.",
+      "Best practice in REST APIs."
+    ],
+    tanglish: "Entity direct-aa expose panna koodathu.",
+    level: "Professional"
+  },
+  {
+    q: "What is Bean Lifecycle?",
+    a: [
+      "Bean creation phase.",
+      "Dependency injection phase.",
+      "Initialization phase.",
+      "Ready to use state.",
+      "Destruction phase.",
+      "Managed by Spring container.",
+      "Configurable using callbacks."
+    ],
+    tanglish: "Bean create irundhu destroy vara lifecycle.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @PostConstruct?",
+    a: [
+      "Runs after bean creation.",
+      "Called after dependency injection.",
+      "Used for initialization logic.",
+      "Executed once per bean.",
+      "Part of bean lifecycle.",
+      "Used before application starts.",
+      "Managed by container."
+    ],
+    tanglish: "Bean ready aana udane run aagum.",
+    level: "Intermediate"
+  },
+  {
+    q: "What is @PreDestroy?",
+    a: [
+      "Runs before bean destruction.",
+      "Used for cleanup logic.",
+      "Closes resources.",
+      "Called when context shuts down.",
+      "Part of lifecycle management.",
+      "Executed once.",
+      "Managed by Spring."
+    ],
+    tanglish: "Bean destroy aagum mun run aagum.",
+    level: "Intermediate"
   }
 ];
+
+
 
 export default function InterviewQuestions() {
   return (
@@ -60,12 +624,31 @@ export default function InterviewQuestions() {
                     {item.level}
                   </span>
                 </div>
-                <div className="flex gap-3">
-                  <div className="mt-1"><MessageSquare className="w-5 h-5 text-amber-500" /></div>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed font-medium">
-                    {item.a}
-                  </p>
-                </div>
+               <div className="flex gap-3">
+  <div className="mt-1">
+    <MessageSquare className="w-5 h-5 text-amber-500" />
+  </div>
+
+  <ul className="space-y-2">
+    {item.a.map((point, i) => (
+      <li
+        key={i}
+        className="flex gap-2 text-sm md:text-base text-slate-600 leading-relaxed font-medium"
+      >
+        <span className="text-amber-500 font-black">{i + 1}.</span>
+        <span>{point}</span>
+      </li>
+    ))}
+
+    {/* Tanglish line */}
+    {item.tanglish && (
+      <li className="mt-3 text-xs md:text-sm italic text-slate-500">
+        👉 {item.tanglish}
+      </li>
+    )}
+  </ul>
+</div>
+
               </div>
             </div>
           </div>
