@@ -1,152 +1,676 @@
 import React, { useState } from "react";
-import { HelpCircle, ChevronDown, ChevronUp, BookOpen, Terminal, ShieldCheck, Zap } from "lucide-react";
+import { ChevronDown, ChevronUp, Code2, Globe } from "lucide-react";
 
 function CssFAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const questions = [
-    { q: "1. What is the CSS box model, and what are its components?", a: "The CSS box model consists of the content, padding, border, and margin. It defines the space an element occupies.", cat: "Basics" },
-    { q: "2. How do you center a div both horizontally and vertically?", a: "Use 'display: flex; justify-content: center; align-items: center;' on the parent container, or use 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);' on the div.", cat: "Layout" },
-    { q: "3. What is the difference between inline, block, and inline-block elements?", a: "'inline' elements don't start on a new line and only take up the width of their content. 'block' elements start on a new line and take up the full width. 'inline-block' elements behave like inline elements but respect height and width.", cat: "Basics" },
-    { q: "4. How does the position property work (relative, absolute, fixed, sticky)?", a: "relative: Positioned relative to its normal position. absolute: Relative to nearest positioned ancestor. fixed: Relative to viewport, stays fixed. sticky: Toggles between relative and fixed based on scroll.", cat: "Layout" },
-    { q: "5. What are CSS selectors, and how do specificity and inheritance work?", a: "Selectors target elements. Specificity determines priority (Inline > ID > Class > Element). Inheritance allows children to inherit styles from parents.", cat: "Basics" },
-    { q: "6. How do you implement responsive design using media queries?", a: "Use @media rules to apply different styles based on screen size, orientation, or resolution.", cat: "Responsive" },
-    { q: "7. Explain the differences between Flexbox and CSS Grid layouts.", a: "Flexbox is one-dimensional (row or column). CSS Grid is two-dimensional (rows and columns simultaneously).", cat: "Layout" },
-    { q: "8. What is the difference between margin and padding?", a: "Margin is the space outside an element's border; padding is the space inside the border, around the content.", cat: "Basics" },
-    { q: "9. What are pseudo-classes and pseudo-elements?", a: "Pseudo-classes (:hover, :focus) target states. Pseudo-elements (::before, ::after) style specific parts of content.", cat: "Advanced" },
-    { q: "10. How do you create CSS animations and key properties?", a: "Use @keyframes for steps and properties like animation-name, duration, and timing-function to control it.", cat: "Animation" },
-    { q: "11. What is z-index and stacking context?", a: "z-index controls stacking order on the z-axis. Stacking context determines how elements are layered based on parent properties.", cat: "Advanced" },
-    { q: "12. Difference between display: none and visibility: hidden?", a: "display: none removes the element from flow; visibility: hidden hides it but keeps its occupied space.", cat: "Basics" },
-    { q: "13. How does float work and how to clear it?", a: "Float pushes elements left/right. Clear using 'clear: both' or clearfix to prevent layout collapse.", cat: "Layout" },
-    { q: "14. How do you optimize CSS for performance?", a: "Minify files, avoid redundant styles, use shorthand properties, and limit complex selectors.", cat: "Performance" },
-    { q: "15. What is box-sizing property?", a: "Defines size calculation. content-box (default) adds padding/border outside; border-box includes them within the width.", cat: "Basics" },
-    { q: "16. How do you use CSS transitions?", a: "Use the 'transition' property for smooth value changes over time (e.g., hover effects).", cat: "Animation" },
-    { q: "17. What are preprocessors like SASS/LESS?", a: "They add variables, nesting, and functions to CSS, making it maintainable and scalable.", cat: "Advanced" },
-    { q: "18. Difference between em and rem units?", a: "em is relative to parent font size; rem is relative to the root (html) font size.", cat: "Basics" },
-    { q: "19. How to handle cross-browser compatibility?", a: "Use vendor prefixes, resets/normalize, and test across different browser engines.", cat: "Advanced" },
-    { q: "20. What are CSS variables?", a: "Reusable values defined with '--' (e.g., --color: blue) and used with 'var(--color)'.", cat: "Advanced" },
-    { q: "21. How does overflow property work?", a: "Controls content exceeding dimensions. Values: visible, hidden, scroll, auto.", cat: "Basics" },
-    { q: "22. How to implement a sticky header?", a: "Use 'position: sticky; top: 0;' on the header element.", cat: "Layout" },
-    { q: "23. What are CSS combinators?", a: "Define relationships: descendant (space), child (>), adjacent (+), general sibling (~).", cat: "Advanced" },
-    { q: "24. What is object-fit property?", a: "Controls how images/videos resize to fit containers (cover, contain, fill).", cat: "Advanced" },
-    { q: "25. Responsive gallery with Grid/Flex?", a: "Grid: grid-template-columns (repeat/auto-fill). Flex: flex-wrap with basis.", cat: "Responsive" },
-    { q: "26. How to make an image responsive?", a: "Use 'max-width: 100%; height: auto;'.", cat: "Responsive" },
-    { q: "27. What is @import rule?", a: "Imports external CSS into a stylesheet; avoided for performance in favor of <link> tags.", cat: "Performance" },
-    { q: "28. What are CSS sprites?", a: "Combining images into one file to reduce HTTP requests, using background-position to show parts.", cat: "Performance" },
-    { q: "29. Difference between opacity and rgba()?", a: "Opacity affects children too; rgba() transparency applies only to the specific color.", cat: "Basics" },
-    { q: "30. Prevent flex item shrink/grow?", a: "Use 'flex-shrink: 0;' and 'flex-grow: 0;'.", cat: "Layout" },
-    { q: "31. :nth-child() vs :nth-of-type()?", a: "nth-child looks at all siblings; nth-of-type looks only at siblings of the same tag type.", cat: "Advanced" },
-    { q: "32. How does calc() work?", a: "Allows mathematical calculations in properties (e.g., width: calc(100% - 20px)).", cat: "Advanced" },
-    { q: "33. What is clip-path property?", a: "Creates a clipping region that defines what part of an element is visible.", cat: "Advanced" },
-    { q: "34. What are CSS resets?", a: "Standardize default browser styles for a consistent starting point.", cat: "Basics" },
-    { q: "35. Style checkbox/radio with CSS?", a: "Use 'appearance: none' and style custom pseudo-elements based on :checked state.", cat: "Advanced" },
-    { q: "36. What is will-change property?", a: "Hints browser about future changes for GPU optimization; use sparingly.", cat: "Performance" },
-    { q: "37. Full-page background image?", a: "background-size: cover; background-position: center; on a full-height container.", cat: "Layout" },
-    { q: "38. Implement dark mode in CSS?", a: "Use '@media (prefers-color-scheme: dark)' or toggle a .dark class with variables.", cat: "Advanced" },
-    { q: "39. Issues caused by float?", a: "Parent container collapse; fixed using clearfix or overflow: hidden.", cat: "Layout" },
-    { q: "40. link vs @import vs Inline?", a: "link: External file (fastest). @import: Inside CSS (slower). Inline: Direct style attribute (highest specificity).", cat: "Performance" },
-  ];
+{
+q: "1. What is CSS?",
+a: `• CSS stands for Cascading Style Sheets.
+• It is used to style HTML elements.
+• It controls layout, colors, and fonts.
+• It separates content from presentation.
+• Tanglish: Website-ku style kudukka use aagum.`
+},
+{
+q: "2. What is the CSS box model?",
+a: `• The box model defines element sizing.
+• It includes content, padding, border, and margin.
+• Padding adds space inside the border.
+• Margin adds space outside the border.
+• Tanglish: Element space epdi calculate aaguthu nu box model.`
+},
+{
+q: "3. Difference between margin and padding?",
+a: `• Margin creates space outside the element.
+• Padding creates space inside the element.
+• Margin does not affect background color.
+• Padding affects background color.
+• Tanglish: Margin veliya, padding ullae space.`
+},
+{
+q: "4. What is display property?",
+a: `• Display defines how an element is shown.
+• Common values are block, inline, inline-block.
+• It affects layout behavior.
+• Used in positioning elements.
+• Tanglish: Element epdi kaattanum nu control pannrathu.`
+},
+{
+q: "5. What is block-level element?",
+a: `• Block elements take full width.
+• They start on a new line.
+• Height and width can be set.
+• Example: div, p.
+• Tanglish: Full-width element.`
+},
+{
+q: "6. What is inline element?",
+a: `• Inline elements take required width.
+• They do not start on new line.
+• Height and width cannot be set.
+• Example: span, a.
+• Tanglish: Line-kulla irukkura element.`
+},
+{
+q: "7. What is inline-block?",
+a: `• Inline-block stays inline.
+• Width and height can be set.
+• Combines inline and block behavior.
+• Used in layouts.
+• Tanglish: Inline + block mix.`
+},
+{
+q: "8. What is position property?",
+a: `• Position controls element placement.
+• Values include static, relative, absolute.
+• It works with top, left, right.
+• Used for layout control.
+• Tanglish: Element place control pannrathu.`
+},
+{
+q: "9. What is position: relative?",
+a: `• Relative positions element from itself.
+• Original space is maintained.
+• Used as reference for absolute.
+• Common in layouts.
+• Tanglish: Thanna place irundhu move aagum.`
+},
+{
+q: "10. What is position: absolute?",
+a: `• Absolute positions from nearest ancestor.
+• Removed from normal flow.
+• Uses top, left properties.
+• Used for overlays.
+• Tanglish: Parent-ku relative-aa move aagum.`
+},
+{
+q: "11. What is position: fixed?",
+a: `• Fixed positions relative to viewport.
+• Element stays on scroll.
+• Removed from document flow.
+• Used for headers.
+• Tanglish: Scroll pannalum move aagathu.`
+},
+{
+q: "12. What is position: sticky?",
+a: `• Sticky toggles between relative and fixed.
+• Depends on scroll position.
+• Needs top value.
+• Used for sticky headers.
+• Tanglish: Scroll-la fix aagum element.`
+},
+{
+q: "13. What is z-index?",
+a: `• Z-index controls stacking order.
+• Higher value comes on top.
+• Works on positioned elements.
+• Used for overlays.
+• Tanglish: Layer order control.`
+},
+{
+q: "14. What is overflow property?",
+a: `• Controls overflowing content.
+• Values are hidden, scroll, auto.
+• Used in containers.
+• Prevents layout break.
+• Tanglish: Content veliya pona control.`
+},
+{
+q: "15. What is float?",
+a: `• Float positions element left or right.
+• Text wraps around it.
+• Removed from normal flow.
+• Used in old layouts.
+• Tanglish: Old-style layout technique.`
+},
+{
+q: "16. How to clear float?",
+a: `• Clear property clears float.
+• Use clear: both.
+• Prevents parent collapse.
+• Used after float.
+• Tanglish: Float problem fix pannrathu.`
+},
+{
+q: "17. What is Flexbox?",
+a: `• Flexbox is one-dimensional layout.
+• Works in row or column.
+• Aligns items easily.
+• Used for responsive layouts.
+• Tanglish: Easy layout system.`
+},
+{
+q: "18. What is justify-content?",
+a: `• Aligns items horizontally.
+• Works on main axis.
+• Used in flex container.
+• Controls spacing.
+• Tanglish: Horizontal alignment.`
+},
+{
+q: "19. What is align-items?",
+a: `• Aligns items vertically.
+• Works on cross axis.
+• Used in flex container.
+• Controls height alignment.
+• Tanglish: Vertical alignment.`
+},
+{
+q: "20. What is flex-wrap?",
+a: `• Controls wrapping of flex items.
+• Values include wrap and nowrap.
+• Used in responsive layouts.
+• Prevents overflow.
+• Tanglish: Items next line poganum-na use.`
+},
+{
+q: "21. What is CSS Grid?",
+a: `• Grid is two-dimensional layout.
+• Works with rows and columns.
+• More powerful than flexbox.
+• Used for complex layouts.
+• Tanglish: Row-column layout system.`
+},
+{
+q: "22. Difference between Flexbox and Grid?",
+a: `• Flexbox is one-dimensional.
+• Grid is two-dimensional.
+• Flexbox for components.
+• Grid for page layout.
+• Tanglish: Flex one direction, grid two.`
+},
+{
+q: "23. What are media queries?",
+a: `• Media queries enable responsive design.
+• Apply styles based on screen size.
+• Used with @media rule.
+• Supports mobile design.
+• Tanglish: Screen size-ku style change.`
+},
+{
+q: "24. What is responsive design?",
+a: `• Responsive design adapts to devices.
+• Works on mobile and desktop.
+• Uses media queries.
+• Improves user experience.
+• Tanglish: Ella device-la fit aagum.`
+},
+{
+q: "25. What is max-width?",
+a: `• Limits element maximum width.
+• Prevents overflow.
+• Used in responsive layouts.
+• Better than fixed width.
+• Tanglish: Max size limit.`
+},
+{
+q: "26. What is min-width?",
+a: `• Sets minimum width.
+• Prevents shrinking.
+• Used in responsive design.
+• Maintains layout.
+• Tanglish: Min size limit.`
+},
+{
+q: "27. What is opacity?",
+a: `• Controls element transparency.
+• Value between 0 and 1.
+• Affects child elements.
+• Used for fade effects.
+• Tanglish: Transparency control.`
+},
+{
+q: "28. Difference between opacity and rgba?",
+a: `• Opacity affects entire element.
+• RGBA affects only color.
+• RGBA does not affect children.
+• Used for backgrounds.
+• Tanglish: Opacity full element, rgba color.`
+},
+{
+q: "29. What are pseudo-classes?",
+a: `• Target element states.
+• Examples: hover, focus.
+• Defined using colon.
+• Used for interactions.
+• Tanglish: State-based styling.`
+},
+{
+q: "30. What are pseudo-elements?",
+a: `• Style part of an element.
+• Examples: ::before, ::after.
+• Use double colon.
+• Used for decoration.
+• Tanglish: Element part style.`
+},
 
-  const categories = ["Basics", "Layout", "Responsive", "Advanced", "Animation", "Performance"];
+
+
+{
+q: ". What are CSS variables?",
+a: `• Variables store reusable values.
+• Defined using -- syntax.
+• Used with var() function.
+• Improves maintainability.
+• Tanglish: Reusable CSS values.`
+},
+{
+q: "31. What is box-sizing property?",
+a: `• Box-sizing controls width and height calculation.
+• content-box is the default value.
+• border-box includes padding and border.
+• Helps in predictable layouts.
+• Tanglish: Width calculation control pannrathu.`
+},
+{
+q: "32. What is border-radius?",
+a: `• Border-radius rounds element corners.
+• Accepts pixel or percentage values.
+• Can be applied to images.
+• Used for modern UI.
+• Tanglish: Corner round pannrathu.`
+},
+{
+q: "33. What is background property?",
+a: `• Background sets color or image.
+• Supports multiple properties.
+• Can control repeat and position.
+• Used for styling sections.
+• Tanglish: Background style set pannrathu.`
+},
+{
+q: "34. Difference between class and id?",
+a: `• Class can be reused.
+• Id must be unique.
+• Class uses dot selector.
+• Id uses hash selector.
+• Tanglish: Class multiple, id single.`
+},
+{
+q: "35. What is specificity?",
+a: `• Specificity decides which CSS rule applies.
+• Inline styles have highest priority.
+• ID selectors override class selectors.
+• Important for conflict resolution.
+• Tanglish: CSS priority system.`
+},
+{
+q: "36. What is !important?",
+a: `• Overrides all other CSS rules.
+• Has highest priority.
+• Breaks normal specificity rules.
+• Should be avoided mostly.
+• Tanglish: Force style apply pannrathu.`
+},
+{
+q: "37. What are CSS units?",
+a: `• Units define size values.
+• Examples: px, %, em, rem.
+• Used for responsive design.
+• Relative units adapt better.
+• Tanglish: Size measurement units.`
+},
+{
+q: "38. Difference between em and rem?",
+a: `• em depends on parent font size.
+• rem depends on root font size.
+• rem is more predictable.
+• Both are relative units.
+• Tanglish: em parent, rem root.`
+},
+{
+q: "39. What is font-family?",
+a: `• Defines text font.
+• Multiple fonts can be listed.
+• Browser picks available font.
+• Used for typography.
+• Tanglish: Text font set pannrathu.`
+},
+{
+q: "40. What is line-height?",
+a: `• Controls vertical spacing of text.
+• Improves readability.
+• Accepts unitless values.
+• Used in text styling.
+• Tanglish: Line spacing control.`
+},
+{
+q: "41. What is text-align?",
+a: `• Aligns text horizontally.
+• Values include left, center, right.
+• Works on block elements.
+• Used in headings and text.
+• Tanglish: Text alignment.`
+},
+{
+q: "42. What is white-space property?",
+a: `• Controls space handling in text.
+• Values include nowrap and pre.
+• Affects line breaks.
+• Used in text layout.
+• Tanglish: Space behavior control.`
+},
+{
+q: "43. What is visibility property?",
+a: `• Controls element visibility.
+• hidden hides element but keeps space.
+• visible shows element.
+• Differs from display none.
+• Tanglish: Visible/hidden control.`
+},
+{
+q: "44. Difference between display none and visibility hidden?",
+a: `• display none removes element from layout.
+• visibility hidden keeps space.
+• display none affects flow.
+• visibility hidden does not.
+• Tanglish: Remove vs hide difference.`
+},
+{
+q: "45. What is cursor property?",
+a: `• Changes mouse cursor style.
+• Example values: pointer, default.
+• Used on buttons and links.
+• Improves UX.
+• Tanglish: Mouse pointer style.`
+},
+{
+q: "46. What is transition?",
+a: `• Adds smooth animation.
+• Used for hover effects.
+• Controls duration and timing.
+• Improves UI feel.
+• Tanglish: Smooth effect kudukkum.`
+},
+{
+q: "47. What is transform property?",
+a: `• Used to rotate or scale elements.
+• Supports translate and skew.
+• Does not affect layout flow.
+• Used for animations.
+• Tanglish: Element move/rotate pannrathu.`
+},
+{
+q: "48. What is animation property?",
+a: `• Creates keyframe animations.
+• Uses @keyframes rule.
+• Supports duration and delay.
+• Used for dynamic effects.
+• Tanglish: Advanced animation system.`
+},
+{
+q: "49. What are keyframes?",
+a: `• Defines animation steps.
+• Used with @keyframes.
+• Controls start and end states.
+• Used in CSS animations.
+• Tanglish: Animation steps define pannrathu.`
+},
+{
+q: "50. What is object-fit?",
+a: `• Controls image resizing.
+• Used with images and videos.
+• Values include cover and contain.
+• Prevents distortion.
+• Tanglish: Image fit control.`
+},
+{
+q: "51. What is overflow-x and overflow-y?",
+a: `• Controls horizontal overflow.
+• Controls vertical overflow.
+• Used for scroll behavior.
+• Helps manage content.
+• Tanglish: X-Y overflow control.`
+},
+{
+q: "52. What is calc() function?",
+a: `• Performs calculations in CSS.
+• Combines units.
+• Used in responsive layouts.
+• Improves flexibility.
+• Tanglish: CSS-la calculation.`
+},
+{
+q: "53. What is aspect-ratio?",
+a: `• Maintains width-height ratio.
+• Useful for images and videos.
+• Prevents layout shift.
+• Modern CSS feature.
+• Tanglish: Width-height proportion.`
+},
+{
+q: "54. What are CSS variables?",
+a: `• Stores reusable values.
+• Defined using -- syntax.
+• Used with var() function.
+• Improves maintainability.
+• Tanglish: Reusable CSS values.`
+},
+{
+q: "55. What is z-index stacking context?",
+a: `• Defines layering context.
+• Created by positioned elements.
+• Affects child elements.
+• Important for overlays.
+• Tanglish: Layer grouping system.`
+},
+{
+q: "56. What is @media rule?",
+a: `• @media applies styles based on conditions.
+• Commonly used for screen sizes.
+• Enables responsive design.
+• Supports print and orientation.
+• Tanglish: Condition base panni style apply pannrathu.`
+},
+{
+q: "57. What is mobile-first design?",
+a: `• Design starts from mobile screens.
+• Then scales to larger screens.
+• Improves performance.
+• Preferred in modern CSS.
+• Tanglish: Mobile-la start pannra design.`
+},
+{
+q: "58. What is vendor prefix?",
+a: `• Vendor prefixes ensure browser support.
+• Examples: -webkit-, -moz-.
+• Used for experimental features.
+• Becoming less common now.
+• Tanglish: Browser support-ku add pannra prefix.`
+},
+{
+q: "59. What is normalize.css?",
+a: `• Normalize.css standardizes browser styles.
+• Keeps useful defaults.
+• Better than full reset.
+• Improves consistency.
+• Tanglish: Browser style equal pannrathu.`
+},
+{
+q: "60. What is CSS reset?",
+a: `• Removes default browser styles.
+• Starts styling from scratch.
+• Avoids inconsistency.
+• Used in older projects.
+• Tanglish: Default style remove pannrathu.`
+},
+{
+q: "61. What is font-weight?",
+a: `• Controls text thickness.
+• Values include normal, bold.
+• Numeric values also supported.
+• Used in typography.
+• Tanglish: Text thickness control.`
+},
+{
+q: "62. What is text-transform?",
+a: `• Changes text case.
+• Values include uppercase, lowercase.
+• Used for headings.
+• Does not change actual text.
+• Tanglish: Text case change.`
+},
+{
+q: "63. What is letter-spacing?",
+a: `• Controls space between letters.
+• Improves readability.
+• Used in headings.
+• Accepts px or em.
+• Tanglish: Letter gap control.`
+},
+{
+q: "64. What is word-spacing?",
+a: `• Controls space between words.
+• Used for readability.
+• Accepts length values.
+• Affects text layout.
+• Tanglish: Word gap control.`
+},
+{
+q: "65. What is box-shadow?",
+a: `• Adds shadow to elements.
+• Supports blur and spread.
+• Used for depth effect.
+• Enhances UI.
+• Tanglish: Element shadow add pannrathu.`
+},
+{
+q: "66. What is text-shadow?",
+a: `• Adds shadow to text.
+• Improves visibility.
+• Accepts blur values.
+• Used sparingly.
+• Tanglish: Text-ku shadow.`
+},
+{
+q: "67. What is pointer-events?",
+a: `• Controls mouse interaction.
+• Can disable clicks.
+• Used in overlays.
+• Helps UI control.
+• Tanglish: Mouse interaction control.`
+},
+{
+q: "68. What is user-select?",
+a: `• Controls text selection.
+• Can disable selecting text.
+• Used for UI protection.
+• Improves UX.
+• Tanglish: Text select panna mudiyuma illaya.`
+},
+{
+q: "69. What is object-position?",
+a: `• Positions image inside container.
+• Works with object-fit.
+• Controls focus area.
+• Used for images.
+• Tanglish: Image position control.`
+},
+{
+q: "70. What is scroll-behavior?",
+a: `• Controls scroll animation.
+• smooth enables smooth scrolling.
+• Used in anchor links.
+• Improves UX.
+• Tanglish: Smooth scroll effect.`
+},
+{
+q: "71. What is accent-color?",
+a: `• Styles form controls.
+• Applies to checkbox and radio.
+• Modern CSS feature.
+• Improves branding.
+• Tanglish: Form control color.`
+},
+{
+q: "72. What is :root selector?",
+a: `• Targets root element.
+• Commonly html element.
+• Used for CSS variables.
+• Improves global control.
+• Tanglish: Root-level selector.`
+},
+{
+q: "73. What is will-change property?",
+a: `• Hints browser about changes.
+• Improves performance.
+• Used before animations.
+• Should be used carefully.
+• Tanglish: Performance hint property.`
+},
+{
+q: "74. What is contain property?",
+a: `• Limits element rendering scope.
+• Improves performance.
+• Used in large layouts.
+• Modern CSS feature.
+• Tanglish: Render scope limit pannrathu.`
+},
+{
+q: "75. What is prefers-color-scheme?",
+a: `• Detects system theme.
+• Used for dark mode.
+• Works with media queries.
+• Improves accessibility.
+• Tanglish: System dark/light mode detect pannrathu.`
+}
+
+
+];
+ // ✅ semicolon fixed
 
   return (
-    <div className="max-w-5xl animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-32">
-      {/* --- HEADER --- */}
-      <header className="mb-12 relative">
-        <div className="flex items-center gap-2 text-indigo-500 font-bold uppercase tracking-[0.2em] text-[10px] mb-4">
-          <BookOpen className="w-4 h-4" />
-          <span>Interview Preparation Guide</span>
+    <div className="max-w-5xl mx-auto p-8">
+      <header className="mb-10">
+        <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase">
+          <Code2 className="w-4 h-4" /> CSS Interview Guide
         </div>
-        <h1 className="text-5xl font-black text-slate-900 mb-6 tracking-tight">
-          CSS <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">Mastery Q&A</span>
+        <h1 className="text-4xl font-black mt-4">
+          CSS Interview Questions
         </h1>
-        <p className="text-xl text-slate-600 leading-relaxed max-w-3xl font-medium">
-          40 Essential concepts to ace your front-end interview. Deep dives into architecture, performance, and layout logic.
-        </p>
       </header>
 
-      {/* --- STATS / OVERVIEW --- */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
-          <div className="text-2xl font-black text-indigo-600">40</div>
-          <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Total Qns</div>
-        </div>
-        <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
-          <div className="text-2xl font-black text-emerald-500">6</div>
-          <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Categories</div>
-        </div>
-        <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
-          <div className="text-2xl font-black text-amber-500">100%</div>
-          <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Mastery</div>
-        </div>
-        <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
-          <ShieldCheck className="w-6 h-6 text-sky-500 mx-auto mb-1" />
-          <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Verified</div>
-        </div>
-      </div>
-
-      {/* --- FAQ LIST --- */}
-      <div className="space-y-4">
-        {questions.map((item, index) => (
-          <div 
-            key={index}
-            className={`group rounded-[2rem] border transition-all duration-300 ${
-              openIndex === index 
-                ? "bg-white border-indigo-200 shadow-xl shadow-indigo-50" 
-                : "bg-slate-50 border-transparent hover:bg-white hover:border-slate-200"
-            }`}
+      {questions.map((item, idx) => {
+        const isOpen = openIndex === idx;
+        return (
+          <div
+            key={idx}
+            className="mb-4 border rounded-xl shadow-sm hover:border-blue-200 transition-colors"
           >
             <button
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full px-8 py-6 flex items-center justify-between text-left"
+              onClick={() => setOpenIndex(isOpen ? null : idx)}
+              className="w-full flex justify-between items-center px-6 py-4 font-semibold text-left"
             >
-              <div className="flex items-center gap-4">
-                <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-black transition-colors ${
-                  openIndex === index ? "bg-indigo-600 text-white" : "bg-white text-slate-400 border border-slate-200"
-                }`}>
-                  {index + 1}
-                </span>
-                <span className={`font-bold text-sm md:text-base ${openIndex === index ? "text-indigo-950" : "text-slate-700"}`}>
-                  {item.q.replace(/^\d+\.\s*/, '')}
-                </span>
-              </div>
-              {openIndex === index ? <ChevronUp className="text-indigo-500 shrink-0" /> : <ChevronDown className="text-slate-400 shrink-0" />}
+              {item.q}
+              {isOpen ? (
+                <ChevronUp className="text-blue-500" />
+              ) : (
+                <ChevronDown className="text-slate-400" />
+              )}
             </button>
-            
-            {openIndex === index && (
-              <div className="px-8 pb-8 animate-in slide-in-from-top-2 duration-300">
-                <div className="h-px bg-slate-100 mb-6" />
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0">
-                    <Terminal className="w-3 h-3" />
-                  </div>
-                  <div className="space-y-4">
-                    <p className="text-slate-600 leading-relaxed font-medium">
-                      {item.a}
-                    </p>
-                    <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                      Tag: {item.cat}
-                    </div>
-                  </div>
-                </div>
+
+            {isOpen && (
+              <div className="px-6 pb-4 text-slate-700 whitespace-pre-line border-t pt-4 bg-slate-50 rounded-b-xl">
+                {item.a}
               </div>
             )}
           </div>
-        ))}
-      </div>
+        );
+      })}
 
-      {/* --- FINAL NOTE --- */}
-      <div className="mt-16 p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-500 rounded-[3rem]">
-        <div className="bg-slate-900 p-12 rounded-[2.9rem] text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500 via-transparent to-transparent" />
-          <Zap className="w-12 h-12 text-amber-400 mx-auto mb-6 animate-pulse" />
-          <h3 className="text-3xl font-black text-white mb-4">Ready to Conquer?</h3>
-          <p className="text-slate-400 max-w-xl mx-auto mb-8">
-            Intha 40 concepts-um clear-ah purinjitta, CSS interviews mattum illa, real-time complex projects-aiyum ungalaala easy-ah handle panna mudiyum.
+      <div className="mt-12 p-6 bg-blue-600 text-white rounded-2xl flex items-start gap-4">
+        <Globe className="w-8 h-8 opacity-80" />
+        <div>
+          <h3 className="font-bold text-lg mb-1">Quick Note:</h3>
+          <p className="text-sm opacity-90">
+            CSS interview-la <strong>Box Model</strong>, <strong>Flexbox</strong>,{" "}
+            <strong>Grid</strong>, and <strong>Specificity</strong> romba important.
+            Ivai ellam layout and responsiveness-ku base concepts.
+            <br />
+            <strong>Tanglish:</strong> Layout purinjaa thaan real-world UI smooth-aa work aagum.
           </p>
-          <button className="px-10 py-4 bg-white text-slate-950 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform">
-            Download PDF Guide
-          </button>
         </div>
       </div>
     </div>
